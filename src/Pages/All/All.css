@@ -39,3 +39,9 @@ ul{
 .text-completed{
     text-decoration: line-through;
 }
+
+@media screen and (min-width: 320px) and (max-width: 768px){
+    .container-list{
+        width: 90%;
+    }
+}
