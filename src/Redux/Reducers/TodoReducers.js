@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO } from '../Actions/todoActions'
+import { ADD_TODO, DELETE_TODO, UPDATE_TODO } from '../Actions/todoActions'
 
 const initialState = {
     data: [],
@@ -18,6 +18,20 @@ const todoReducer = (state = initialState, action) => {
           data: filteredData,
         }
         
+        case UPDATE_TODO:
+          const updatedData = state.data.map((todo) => {
+            if (todo.id === action.id) {
+              return {
+                ...todo,
+                ...action.updatedTodo,
+              };
+            }
+            return todo;
+          });
+          return {
+            data: updatedData,
+          };
+
       default:
         return state;
     }
