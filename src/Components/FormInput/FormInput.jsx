@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {useDispatch} from 'react-redux'
 import {addTodo} from '../../Redux/Actions/todoActions'
 import {IoIosAddCircle} from 'react-icons/io'
+import Swal from 'sweetalert2'
 
 const FormInput = () => {
     const [inputText, setInputText] = useState('');
@@ -10,7 +11,11 @@ const FormInput = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       if (inputText === "") {
-        alert("Input is Empty");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please input your todo list!',
+        })
       } else {
         dispatch(addTodo({
           id: Math.floor(Math.random() * 1000),
