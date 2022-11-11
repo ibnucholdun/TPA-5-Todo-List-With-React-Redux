@@ -9,6 +9,7 @@ import './All.css'
 const All = () => {
   const {data} = useSelector((state) => state.todo);
   const [edit, setEdit] = useState(false);
+  const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
 
   const handleEdit = (id) => {
@@ -36,6 +37,20 @@ const All = () => {
     }
   }
 
+  const handleChecked = (id) => {
+    setChecked(!checked);
+
+    const newData = data.map((item) => {
+      if (item.id === id) {
+        item.completed = !item.completed;
+      }
+      return item;
+    });
+    return{
+      data: newData
+    }
+  }
+
   return (
       <ul>
         {
@@ -44,9 +59,15 @@ const All = () => {
                 <div className="container-checkbox">
                 {
                     item.edit ? (
-                          <input type="text" value={item.item} onChange={(event) => dispatch(updatedTodo(handleChanges(item.id, event)))} className='input-group w-75'/>
+                      <>
+                        <input type="checkbox" className='checkbox' checked onChange={() => handleChecked(item.id)}/>
+                        <input type="text" value={item.item} onChange={(event) => dispatch(updatedTodo(handleChanges(item.id, event)))} className='input-group w-75'/>
+                      </>
                     ) : (
-                        <span>{item.item}</span>
+                      <>
+                        <input type="checkbox" className='checkbox' checked={item.completed} onChange={() => dispatch(updatedTodo(handleChecked(item.id)))} />
+                        <span className={item.completed ? "text-completed" : ""}>{item.item}</span>
+                      </>
                     )
                   }
                 </div>
