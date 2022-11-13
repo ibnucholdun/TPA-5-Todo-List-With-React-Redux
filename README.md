@@ -16,7 +16,7 @@
 - [Bootstrap](https://getbootstrap.com/)
 
 ### Link Production
-- https://todo-list-app-ic.vercel.app/
+- https://todo-list-app-ic.netlify.app/
 
 ### Author
 - Ibnu Choldun
